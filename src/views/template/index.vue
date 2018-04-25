@@ -1,6 +1,9 @@
 <template>
-  <div class="app-container" id="app">
-    <el-row :gutter="20">
+<div class="app-container" id="app">
+  <el-container>
+  <el-aside width="200px" style="background-color:red">图层</el-aside>
+  
+    <el-header>    <el-row :gutter="20">
       <el-col :span="1"><div class="grid-content bg-purple">&nbsp;</div></el-col>
       <el-col :span="8">
         <div class="grid-content bg-purple">
@@ -17,8 +20,9 @@
         </el-badge>
         </div>
       </el-col>
-    </el-row>
-    <grid-layout
+    </el-row></el-header>
+    <el-main>
+<grid-layout
             :layout="layout"
             :col-num="12"
             :row-height="30"
@@ -32,7 +36,13 @@
             {{item.i}}
         </grid-item>
     </grid-layout>
-    <el-button type="primary" >Create</el-button>
+
+    </el-main>
+  </el-container>
+
+
+  
+    
   </div>
 </template>
 
@@ -53,8 +63,27 @@ export default {
   data() {
     return {
       layout: [
-        { x: 0, y: 0, w: 2, h: 2, i: '0' }
-      ]
+            {'x':0,'y':0,'w':2,'h':2,'i':'0'},
+            {'x':2,'y':0,'w':2,'h':4,'i':'1'},
+            {'x':4,'y':0,'w':2,'h':5,'i':'2'},
+            {'x':6,'y':0,'w':2,'h':3,'i':'3'},
+            {'x':8,'y':0,'w':2,'h':3,'i':'4'},
+            {'x':10,'y':0,'w':2,'h':3,'i':'5'},
+            {'x':0,'y':5,'w':2,'h':5,'i':'6'},
+            {'x':2,'y':5,'w':2,'h':5,'i':'7'},
+            {'x':4,'y':5,'w':2,'h':5,'i':'8'},
+            {'x':6,'y':4,'w':2,'h':4,'i':'9'},
+            {'x':8,'y':4,'w':2,'h':4,'i':'10'},
+            {'x':10,'y':4,'w':2,'h':4,'i':'11'},
+            {'x':0,'y':10,'w':2,'h':5,'i':'12'},
+            {'x':2,'y':10,'w':2,'h':5,'i':'13'},
+            {'x':4,'y':8,'w':2,'h':4,'i':'14'},
+            {'x':6,'y':8,'w':2,'h':4,'i':'15'},
+            {'x':8,'y':10,'w':2,'h':5,'i':'16'},
+            {'x':10,'y':4,'w':2,'h':2,'i':'17'},
+            {'x':0,'y':9,'w':2,'h':3,'i':'18'},
+            {'x':2,'y':6,'w':2,'h':2,'i':'19'}
+        ]
     }
   },
   created() {
@@ -121,4 +150,38 @@ export default {
   box-sizing: border-box;
   cursor: pointer;
 }
+
+  .el-header, .el-footer {
+    background-color: #B3C0D1;
+    color: #333;
+    text-align: center;
+    line-height: 60px;
+  }
+  
+  .el-aside {
+    background-color: #D3DCE6;
+    color: #333;
+    text-align: center;
+    line-height: 200px;
+  }
+  
+  .el-main {
+    background-color: #E9EEF3;
+    color: #333;
+    text-align: center;
+    line-height: 160px;
+  }
+  
+  body > .el-container {
+    margin-bottom: 40px;
+  }
+  
+  .el-container:nth-child(5) .el-aside,
+  .el-container:nth-child(6) .el-aside {
+    line-height: 260px;
+  }
+  
+  .el-container:nth-child(7) .el-aside {
+    line-height: 320px;
+  }
 </style>
