@@ -72,6 +72,32 @@ export const constantRouterMap = [
     ]
   },
 
+  {
+    path: '/dataset',
+    component: Layout,
+    children: [
+      {
+        path: 'dataset',
+        name: 'Dataset',
+        component: () => import('@/views/dataset/index'),
+        meta: { title: 'Dataset', icon: 'form' }
+      }
+    ]
+  },
+
+  {
+    path: '/template',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Template',
+        component: () => import('@/views/template/index'),
+        meta: { title: 'Template', icon: 'user' }
+      }
+    ]
+  },
+
   { path: '*', redirect: '/404', hidden: true }
 ]
 
