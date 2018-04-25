@@ -1,28 +1,30 @@
 <template>
 <div class="app-container" id="app">
   <el-container>
-  <el-aside width="200px" style="background-color:red">图层</el-aside>
-  
-    <el-header>    <el-row :gutter="20">
-      <el-col :span="1"><div class="grid-content bg-purple">&nbsp;</div></el-col>
-      <el-col :span="8">
-        <div class="grid-content bg-purple">
-               <el-button size="mini">预览</el-button>
-        <el-button size="mini">发布</el-button>
-        </div>
-      </el-col>
-      <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-      <el-col :span="4"><div class="grid-content bg-purple">
-        <el-button size="mini">预览</el-button>
-        <el-button size="mini">发布</el-button>
-        <el-badge :value="100" :max="10" class="item">
-          <el-button size="small">消息</el-button>
-        </el-badge>
-        </div>
-      </el-col>
-    </el-row></el-header>
+    <el-header>
+      <el-row :gutter="20">
+        <el-col :span="3">
+          <el-button size="mini">打开</el-button>
+          <el-button size="mini">新建</el-button>
+        </el-col>
+        <el-col :span="8" :offset="1">
+          <div class="grid-content bg-purple">
+            
+            <el-button size="mini" @click="addItem">添加</el-button>
+            <el-button size="mini">预览</el-button>
+            <el-button size="mini">发布</el-button>
+          </div>
+        </el-col>
+        <el-col :span="4"><div class="grid-content bg-purple">
+          <el-button size="mini">预览</el-button>
+          <el-button size="mini">发布</el-button>
+          <el-button size="mini">帮助</el-button>
+          </div>
+        </el-col>
+      </el-row>
+    </el-header>
     <el-main>
-<grid-layout
+  <grid-layout
             :layout="layout"
             :col-num="12"
             :row-height="30"
@@ -33,6 +35,7 @@
             :use-css-transforms="true"
     >
         <grid-item v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i">
+          复制、删除
             {{item.i}}
         </grid-item>
     </grid-layout>
@@ -40,22 +43,18 @@
     </el-main>
   </el-container>
 
-
-  
-    
   </div>
 </template>
 
 <script>
 // 这个组件负责模板的构建、保存、修改
+import VueGridLayout from "vue-grid-layout";
 
-import VueGridLayout from 'vue-grid-layout'
-
-var GridLayout = VueGridLayout.GridLayout
-var GridItem = VueGridLayout.GridItem
+var GridLayout = VueGridLayout.GridLayout;
+var GridItem = VueGridLayout.GridItem;
 
 export default {
-  name: 'layoutgrid',
+  name: "layoutgrid",
   components: {
     GridLayout,
     GridItem
@@ -63,39 +62,56 @@ export default {
   data() {
     return {
       layout: [
-            {'x':0,'y':0,'w':2,'h':2,'i':'0'},
-            {'x':2,'y':0,'w':2,'h':4,'i':'1'},
-            {'x':4,'y':0,'w':2,'h':5,'i':'2'},
-            {'x':6,'y':0,'w':2,'h':3,'i':'3'},
-            {'x':8,'y':0,'w':2,'h':3,'i':'4'},
-            {'x':10,'y':0,'w':2,'h':3,'i':'5'},
-            {'x':0,'y':5,'w':2,'h':5,'i':'6'},
-            {'x':2,'y':5,'w':2,'h':5,'i':'7'},
-            {'x':4,'y':5,'w':2,'h':5,'i':'8'},
-            {'x':6,'y':4,'w':2,'h':4,'i':'9'},
-            {'x':8,'y':4,'w':2,'h':4,'i':'10'},
-            {'x':10,'y':4,'w':2,'h':4,'i':'11'},
-            {'x':0,'y':10,'w':2,'h':5,'i':'12'},
-            {'x':2,'y':10,'w':2,'h':5,'i':'13'},
-            {'x':4,'y':8,'w':2,'h':4,'i':'14'},
-            {'x':6,'y':8,'w':2,'h':4,'i':'15'},
-            {'x':8,'y':10,'w':2,'h':5,'i':'16'},
-            {'x':10,'y':4,'w':2,'h':2,'i':'17'},
-            {'x':0,'y':9,'w':2,'h':3,'i':'18'},
-            {'x':2,'y':6,'w':2,'h':2,'i':'19'}
-        ]
-    }
+        { x: 0, y: 0, w: 2, h: 2, i: "0" },
+        { x: 2, y: 0, w: 2, h: 4, i: "1" },
+        { x: 4, y: 0, w: 2, h: 5, i: "2" },
+        { x: 6, y: 0, w: 2, h: 3, i: "3" },
+        { x: 8, y: 0, w: 2, h: 3, i: "4" },
+        { x: 10, y: 0, w: 2, h: 3, i: "5" },
+        { x: 0, y: 5, w: 2, h: 3, i: "6" },
+        { x: 2, y: 5, w: 2, h: 3, i: "7" },
+        { x: 4, y: 5, w: 2, h: 3, i: "8" },
+        { x: 6, y: 4, w: 2, h: 4, i: "9" },
+        { x: 8, y: 4, w: 2, h: 4, i: "10" },
+        { x: 10, y: 4, w: 2, h: 4, i: "11" },
+        { x: 0, y: 10, w: 2, h: 2, i: "12" },
+        { x: 2, y: 10, w: 2, h: 2, i: "13" },
+        { x: 4, y: 8, w: 2, h: 2, i: "14" },
+        { x: 6, y: 8, w: 2, h: 2, i: "15" },
+        { x: 8, y: 10, w: 2, h: 2, i: "16" },
+        { x: 10, y: 4, w: 2, h: 2, i: "17" },
+        { x: 0, y: 9, w: 2, h: 3, i: "18" },
+        { x: 2, y: 6, w: 2, h: 2, i: "19" }
+      ],
+      index: 0
+    };
   },
   created() {
     // 创建初始化layout grid
+    this.index = this.layout.length;
   },
   methods: {
-    showPwd() {}
+    showPwd() {},
+    addItem: function() {
+      var item = {
+        x: 0,
+        y: 0,
+        w: 2,
+        h: 2,
+        i: this.index + "",
+        whatever: "bbb"
+      };
+      this.index++;
+      this.layout.push(item);
+    }
   }
-}
+};
 </script>
 
 <style>
+div{
+  border: 1px solid seagreen;
+}
 .vue-grid-item:not(.vue-grid-placeholder) {
   background: #ccc;
   border: 1px solid black;
@@ -151,37 +167,37 @@ export default {
   cursor: pointer;
 }
 
-  .el-header, .el-footer {
-    background-color: #B3C0D1;
-    color: #333;
-    text-align: center;
-    line-height: 60px;
-  }
-  
-  .el-aside {
-    background-color: #D3DCE6;
-    color: #333;
-    text-align: center;
-    line-height: 200px;
-  }
-  
-  .el-main {
-    background-color: #E9EEF3;
-    color: #333;
-    text-align: center;
-    line-height: 160px;
-  }
-  
-  body > .el-container {
-    margin-bottom: 40px;
-  }
-  
-  .el-container:nth-child(5) .el-aside,
-  .el-container:nth-child(6) .el-aside {
-    line-height: 260px;
-  }
-  
-  .el-container:nth-child(7) .el-aside {
-    line-height: 320px;
-  }
+.el-header,
+.el-footer {
+  background-color: #b3c0d1;
+  color: #333;
+  text-align: center;
+  line-height: 60px;
+}
+
+.el-aside {
+  background-color: #d3dce6;
+  color: #333;
+  text-align: center;
+  line-height: 200px;
+}
+
+.el-main {
+  background-color: #e9eef3;
+  color: #333;
+  text-align: center;
+}
+
+body > .el-container {
+  margin-bottom: 40px;
+}
+
+.el-container:nth-child(5) .el-aside,
+.el-container:nth-child(6) .el-aside {
+  line-height: 260px;
+}
+
+.el-container:nth-child(7) .el-aside {
+  line-height: 320px;
+}
 </style>
