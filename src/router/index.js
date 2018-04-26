@@ -21,97 +21,136 @@ import Layout from '../views/layout/Layout'
     icon: 'svg-name'             the icon show in the sidebar,
   }
 **/
-export const constantRouterMap = [
-  { path: '/login', component: () => import('@/views/login/index'), hidden: true },
-  { path: '/404', component: () => import('@/views/404'), hidden: true },
+export const constantRouterMap = [{
+  path: '/login',
+  component: () =>
+    import('@/views/login/index'),
+  hidden: true
+},
+{
+  path: '/404',
+  component: () =>
+    import('@/views/404'),
+  hidden: true
+},
 
+{
+  path: '/',
+  component: Layout,
+  redirect: '/dashboard',
+  name: 'Dashboard',
+  hidden: true,
+  children: [{
+    path: 'dashboard',
+    component: () =>
+      import('@/views/dashboard/index')
+  }]
+},
+
+{
+  path: '/example',
+  hidden: true,
+  component: Layout,
+  redirect: '/example/table',
+  name: 'Example',
+  meta: { title: 'Example', icon: 'example' },
+  children: [{
+    path: 'table',
+    name: 'Table',
+    component: () =>
+      import('@/views/table/index'),
+    meta: { title: 'Table', icon: 'table' }
+  },
   {
-    path: '/',
-    component: Layout,
-    redirect: '/dashboard',
-    name: 'Dashboard',
+    path: 'tree',
+    name: 'Tree',
+    component: () =>
+      import('@/views/tree/index'),
+    meta: { title: 'Tree', icon: 'tree' }
+  }
+  ]
+},
+
+{
+  path: '/form',
+  hidden: true,
+  component: Layout,
+  children: [{
+    path: 'index',
+    name: 'Form',
+    component: () =>
+      import('@/views/form/index'),
+    meta: { title: 'Form', icon: 'form' }
+  }]
+},
+
+{
+  path: '/mydataset',
+  component: Layout,
+  children: [{
+    path: 'index',
+    name: '我的数据集',
+    component: () =>
+      import('@/views/mydataset/index'),
+    meta: { title: '我的数据集', icon: 'form' }
+  }]
+},
+
+{
+  path: '/myviews',
+  component: Layout,
+  children: [{
+    path: 'index',
+    name: '我的可视化',
+    component: () =>
+      import('@/views/myviews/index'),
+    meta: { title: '我的可视化', icon: 'form' }
+  }]
+},
+
+{
+  path: '/template',
+  component: Layout,
+  hidden: true,
+  children: [{
+    path: 'index',
+    name: 'Template',
     hidden: true,
-    children: [{
-      path: 'dashboard',
-      component: () => import('@/views/dashboard/index')
-    }]
+    component: () =>
+      import('@/views/template/index'),
+    meta: { title: 'Template', icon: 'user' }
   },
-
   {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
+    path: 'add',
+    name: 'TemplateAdd',
+    hidden: true,
+    component: () =>
+      import('@/views/template/add'),
+    meta: { title: 'TemplateAdd', icon: 'user' }
   },
-
   {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
+    path: 'modify',
+    name: 'TemplateModify',
+    hidden: true,
+    component: () =>
+      import('@/views/template/modify'),
+    meta: { title: 'TemplateModify', icon: 'user' }
+  }]
+},
 
-  {
-    path: '/dataset',
-    component: Layout,
-    children: [
-      {
-        path: 'dataset',
-        name: 'Dataset',
-        component: () => import('@/views/dataset/index'),
-        meta: { title: 'Dataset', icon: 'form' }
-      }
-    ]
-  },
+{
+  path: '/demo',
+  component: Layout,
+  children: [{
+    path: 'index',
+    name: 'demo',
+    component: () =>
+      import('@/views/demo/index'),
+    meta: { title: 'demo', icon: 'user' }
+  }]
+},
 
-  {
-    path: '/template',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Template',
-        component: () => import('@/views/template/index'),
-        meta: { title: 'Template', icon: 'user' }
-      }
-    ]
-  },
-
-  {
-    path: '/demo',
-    component: Layout,
-    children: [
-      {
-        path: 'demo',
-        name: 'demo',
-        component: () => import('@/views/demo/index'),
-        meta: { title: 'demo', icon: 'user' }
-      }
-    ]
-  },
-
-  { path: '*', redirect: '/404', hidden: true }
+{ path: '*', redirect: '/404', hidden: true }
 ]
 
 export default new Router({
@@ -119,4 +158,3 @@ export default new Router({
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap
 })
-
