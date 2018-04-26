@@ -1,6 +1,11 @@
 <template>
   <div class="app-container">
     <!--可视化选择一个模板-->
+    <el-alert
+      title="请选择一个模板"
+      type="success"
+      show-icon>
+    </el-alert>
       <div class="left_continer" v-for="item in templates" @click="addView">
         <el-tooltip placement="top">
           <div slot="content"><img :src="imgs[0]"/></div>
